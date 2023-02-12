@@ -1,4 +1,3 @@
-//https://github.com/stefanylaforest/react-native-weather-app
 import React, { useEffect, useState } from "react";
 import { ScrollView, SafeAreaView, ImageBackground, View, Text, Alert } from "react-native";
 import styled from "styled-components/native";
@@ -12,29 +11,28 @@ const App = () => {
 
   useEffect(() => {
     setWeatherData([]);
-    myCities.forEach(city => {
+    myCities.forEach((city) => {
       fetchWeather(city);
     });
   }, [myCities]);
 
   const showAlert = () => {
-  Alert.alert(
-    'Error finding city',
-    'The city you are looking for is not found. Please try again.',
-    [
+    Alert.alert(
+      "Error finding city",
+      "The city you are looking for is not found. Please try again.",
+      [
+        {
+          text: "Cancel",
+          onPress: () => setCity(""),
+          style: "cancel",
+        },
+      ],
       {
-        text: 'Cancel',
-        onPress: () => setCity(''),
-        style: 'cancel',
-      },
-    ],
-    {
-      cancelable: true,
-      onDismiss: () =>
-      setCity('')
-    },
-  );
-  }
+        cancelable: true,
+        onDismiss: () => setCity(""),
+      }
+    );
+  };
 
   const fetchWeather = async (city) => {
     try {
@@ -42,51 +40,67 @@ const App = () => {
         `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${config.API_KEY}&units=metric`
       );
       if (!response.ok) {
-        throw new Error(`Unable to fetch weather for ${city}. Response status: ${response.status}`);
+        // remove city from myCities if the city is not found
+        let newcities = myCities.filter((cityIter) => cityIter !== city);
+        setMyCities(newcities);
+        throw new Error(
+          `Unable to fetch weather for ${city}. Response status: ${response.status}`
+        );
+      } else {
+        const data = await response.json();
+        setWeatherData((prevData) => [...prevData, data]);
       }
-      const data = await response.json();
-      setWeatherData(prevData => [...prevData, data]);
     } catch (error) {
       console.error(error);
       showAlert();
-  }};
+    }
+  };
 
   return (
     <Container>
       <ImageBackground source={bgImg} style={{ width: "100%", height: "100%" }}>
-      <SafeAreaView style={{ flex: 1 }}>
-
-        <Title>Weather App</Title>
-        <ForecastSearch
-          city={city}
-          setCity={setCity}
-          setMyCities={setMyCities}
-        />
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={{ flex: 1 }}>
-          <FutureForecastContainer>
-            {weatherData.length ? (
-              weatherData.map((data, index) => (
-                <CityForecast key={index} CityWeather={data} setMyCities={setMyCities} index={index} />
+        <SafeAreaView style={{ flex: 1 }}>
+          <Title>Weather App</Title>
+          <ForecastSearch
+            city={city}
+            setCity={setCity}
+            setMyCities={setMyCities}
+          />
+          <ScrollView
+            contentContainerStyle={{ flexGrow: 1 }}
+            style={{ flex: 1 }}
+          >
+            <FutureForecastContainer>
+              {weatherData.length ? (
+                weatherData.map((data, index) => (
+                  <CityForecast
+                    key={index}
+                    CityWeather={data}
+                    setMyCities={setMyCities}
+                    index={index}
+                  />
                 ))
-            ) : (
-              <NoWeather>No Weather to show, Add your first fav city!</NoWeather>
-            )}
-          </FutureForecastContainer>
-        </ScrollView>
+              ) : (
+                <NoWeather>
+                  No Weather to show, Add your first fav city!
+                </NoWeather>
+              )}
+            </FutureForecastContainer>
+          </ScrollView>
         </SafeAreaView>
-
       </ImageBackground>
     </Container>
   );
 };
 
-const ForecastSearch = ({
-  city,
-  setCity,
-  setMyCities
-}) => {
+const ForecastSearch = ({ city, setCity, setMyCities }) => {
   const handleSubmit = () => {
-    setMyCities(prevCities => [...prevCities, city]);
+    // don't store duplicate values, only store unique values
+    setMyCities((prevCities) =>
+      [...prevCities, city].filter(
+        (city, index, self) => self.indexOf(city) === index
+      )
+    );
   };
 
   return (
@@ -101,9 +115,9 @@ const ForecastSearch = ({
   );
 };
 
-
-const CityForecast = ({ CityWeather, setMyCities, index  }) => {
+const CityForecast = ({ CityWeather, setMyCities, index }) => {
   const { name, weather, main, wind } = CityWeather;
+  console.log(main);
   const temp = main ? Math.round(main.temp) : null;
   const feelsLike = main ? Math.round(main.feels_like) : null;
   const low = main ? Math.round(main.temp_min) : null;
@@ -113,30 +127,24 @@ const CityForecast = ({ CityWeather, setMyCities, index  }) => {
   const rain = CityWeather.rain ? CityWeather.rain : 0;
 
   const handleDelete = () => {
-    setMyCities(prevCities => prevCities.filter((_, i) => i !== index));
+    setMyCities((prevCities) => prevCities.filter((_, i) => i !== index));
   };
 
   return (
     <CityView>
       <CityName>{name}</CityName>
-      <MainInfoContainer>
-        <CityTempView>
-          {weather && (
-            <WeatherIcon
-              source={{
-                uri: `http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`,
-              }}
-              resizeMode={"contain"}
-            />
-          )}
-          <CityDegrees>
-            {temp}°C
-          </CityDegrees>
-        </CityTempView>
-        <Description>
-          {weather && weather[0].description}
-        </Description>
-      </MainInfoContainer>
+      <CityTempView>
+        {weather && (
+          <WeatherIcon
+            source={{
+              uri: `http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`,
+            }}
+            resizeMode={"contain"}
+          />
+        )}
+        <CityDegrees>{temp}°C</CityDegrees>
+      </CityTempView>
+      <Description>{weather && weather[0].description}</Description>
       <SecondaryInfoContainer>
         <Row>
           <DetailsBox>
@@ -147,18 +155,18 @@ const CityForecast = ({ CityWeather, setMyCities, index  }) => {
             <Label>Low</Label>
             <Details>{low}°C</Details>
           </DetailsBox>
-          </Row>
-          <Row>
+        </Row>
+        <Row>
           <DetailsBox>
             <Label>High</Label>
             <Details>{high}°C</Details>
           </DetailsBox>
           <DetailsBox>
             <Label>Wind</Label>
-            <Details>{windSpeed} m/s</Details>
+            <Details>{windSpeed}m/s</Details>
           </DetailsBox>
-          </Row>
-          <Row>
+        </Row>
+        <Row>
           <DetailsBox>
             <Label>Humidity</Label>
             <Details>{humidity}%</Details>
@@ -241,9 +249,6 @@ const CityTempView = styled.View`
 `;
 
 const MainInfoContainer = styled.View`
-  display: flex;
-  flex:1;
-  align-items: center;
 `;
 
 const Description = styled.Text`
