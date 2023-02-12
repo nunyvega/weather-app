@@ -1,13 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, SafeAreaView, ImageBackground, View, Text, Alert } from "react-native";
-import styled from "styled-components/native";
+import styled, { ThemeProvider } from "styled-components/native";
 import config from "./config";
-import bgImg from "./assets/5.jpeg";
+import bgImgDark from "./assets/dark.jpeg";
+import bgImgLight from "./assets/light.jpeg";
+
+const lightTheme = {
+  background: "dodgerblue",
+  title: "palevioletred",
+  text: "black",
+  bgImage: bgImgLight,
+};
+
+const darkTheme = {
+  background: "black",
+  title: "white",
+  text: "white",
+  bgImage: bgImgDark,
+};
 
 const App = () => {
   const [city, setCity] = useState("Toronto");
   const [myCities, setMyCities] = useState(["Frankfurt"]);
   const [weatherData, setWeatherData] = useState([]);
+  const [theme, setTheme] = useState("light");
 
   useEffect(() => {
     setWeatherData([]);
@@ -56,11 +72,22 @@ const App = () => {
     }
   };
 
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
+
   return (
-    <Container>
-      <ImageBackground source={bgImg} style={{ width: "100%", height: "100%" }}>
+    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <Container>
+      <ImageBackground 
+        source={theme === "light" ? lightTheme.bgImage : darkTheme.bgImage } 
+        style={{ width: "100%", height: "100%" }}
+      >
         <SafeAreaView style={{ flex: 1 }}>
           <Title>Weather App</Title>
+          <ToggleThemeButton onPress={toggleTheme}>
+          <ToggleThemeButtonText>Toggle theme</ToggleThemeButtonText>
+          </ToggleThemeButton>
           <ForecastSearch
             city={city}
             setCity={setCity}
@@ -90,6 +117,7 @@ const App = () => {
         </SafeAreaView>
       </ImageBackground>
     </Container>
+  </ThemeProvider>
   );
 };
 
@@ -117,7 +145,6 @@ const ForecastSearch = ({ city, setCity, setMyCities }) => {
 
 const CityForecast = ({ CityWeather, setMyCities, index }) => {
   const { name, weather, main, wind } = CityWeather;
-  console.log(main);
   const temp = main ? Math.round(main.temp) : null;
   const feelsLike = main ? Math.round(main.feels_like) : null;
   const low = main ? Math.round(main.temp_min) : null;
@@ -187,17 +214,17 @@ const CityForecast = ({ CityWeather, setMyCities, index }) => {
 const Title = styled.Text`
   font-size: 25px;
   text-align: center;
-  color: palevioletred;
+  color: ${props => props.theme.title};
 `;
 
 const Container = styled.View`
   flex: 1;
-  background-color: dodgerblue;
+  background-color: ${props => props.theme.background};
 `;
 
 const NoWeather = styled.Text`
   text-align: center;
-  color: white;
+  color: ${props => props.theme.text};
 `;
 
 const FutureForecastContainer = styled.View`
@@ -216,7 +243,7 @@ const ContainerSearch = styled.View`
 const SearchBy = styled.View`
   display: flex;
   flex-direction: row;
-  color: white;
+  color: ${props => props.theme.background};
   margin-top: 10px;
   align-items: center;
   justify-content: flex-start;
@@ -227,7 +254,8 @@ const SearchBy = styled.View`
 const SearchCity = styled.TextInput`
   height: 50px;
   margin: 12px;
-  background-color: white;
+  background-color: ${props => props.theme.background};
+  color: ${props => props.theme.text};
   padding: 15px;
   border-radius: 10px;
   width: 95%;
@@ -252,13 +280,13 @@ const MainInfoContainer = styled.View`
 `;
 
 const Description = styled.Text`
-  color: white;
-  font-size: 15px;
+color: ${props => props.theme.text};
+font-size: 15px;
   text-transform: capitalize;
 `;
 
 const SecondaryInfoContainer = styled.View`
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: ${props => props.theme.background};
   border-radius: 20px;
   display: flex;
   align-items: center;
@@ -274,7 +302,7 @@ const WeatherIcon = styled.Image`
 `;
 
 const CityName = styled.Text`
-  color: white;
+  color: ${props => props.theme.text};
   display: flex;
   justify-content: center;
   margin-top: 10px;
@@ -282,7 +310,7 @@ const CityName = styled.Text`
 `;
 
 const CityDegrees = styled.Text`
-  color: white;
+  color: ${props => props.theme.text};
   display: flex;
   justify-content: center;
   margin-top: 10px;
@@ -294,7 +322,7 @@ const Row = styled.View`
   flex-direction: row;
   width: 100%;
   justify-content: space-around;
-  color: black;
+  color: ${props => props.theme.background};
 `;
 
 const DetailsBox = styled.View`
@@ -303,10 +331,11 @@ const DetailsBox = styled.View`
 
 const Label = styled.Text`
   font-size: 18px;
+  color: ${props => props.theme.text};
 `;
 
 const Details = styled.Text`
-  color: black;
+  color: ${props => props.theme.text};
   font-size: 15px;
   text-transform: capitalize;
 `;
@@ -315,13 +344,28 @@ const CloseButton = styled.TouchableOpacity`
   position: absolute;
   right: 20px;
   top: 20px;
-  background-color: white;
+  background-color: ${props => props.theme.background};
   padding: 5px 10px;
   border-radius: 10px;
 `;
 
 const CloseButtonText = styled.Text`
+  color: ${props => props.theme.text};
   font-size: 20px;
+`;
+
+const ToggleThemeButton = styled.TouchableOpacity`
+  position: absolute;
+  right: 20px; 
+  top: 60px;
+  background-color: ${props => props.theme.background};
+  padding: 5px 10px;
+  border-radius: 10px;
+`;
+
+const ToggleThemeButtonText = styled.Text`
+  color: ${props => props.theme.text};
+  font-size: 10px;
 `;
 
 export default App;
