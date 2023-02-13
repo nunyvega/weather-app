@@ -1,3 +1,5 @@
+// Description: This file contains the functions to fetch the weather data from the open weather api
+// and to store and get data from async storage
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import config from "./config";
 import { stringEnglish, stringSpanish } from "./translations";

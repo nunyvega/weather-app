@@ -1,3 +1,5 @@
+// Description: This is the main component of the app. 
+// It is the root component of the app and contains the navigation and the theme provider.
 import { useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -8,6 +10,7 @@ import Home from "./components/Home";
 import WeatherDetails from "./components/WeatherDetails";
 import { fetchWeather, storeData, getData } from "./apiFunctions";
 
+// create the stack navigator to navigate between the home and weather details screens
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -18,10 +21,12 @@ const App = () => {
   const [index, setIndex] = useState(0);
   const [language, setLanguage] = useState("english");
 
+  // get the data from async storage when the app starts
   useEffect(() => {
     getData(setTheme, setMyCities, setLanguage);
   }, []);
 
+  // fetch the weather data for each city in myCities when myCities changes
   useEffect(() => {
     setWeatherData([]);
     myCities.forEach((city) => {
@@ -30,17 +35,20 @@ const App = () => {
     storeData("@myCities", myCities);
   }, [myCities]);
 
+  // toggle the language between english and spanish and store the language in async storage
   const toggleLanguage = () => {
     storeData("@language", language === "english" ? "spanish" : "english");
     setLanguage(language === "english" ? "spanish" : "english");
   };
 
+  // toggle the theme between light and dark mode and store the theme in async storage
   const toggleTheme = () => {
     storeData("@theme", theme === "light" ? "dark" : "light");
     setTheme(theme === "light" ? "dark" : "light");
   };
 
   return (
+    {/*pass the theme to the theme provider and stack navigator*/}
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <NavigationContainer>
         <Stack.Navigator
@@ -56,6 +64,7 @@ const App = () => {
             },
           }}
         >
+          {/*pass the props to the home and weather details screens*/}
           <Stack.Screen
             name="Home"
             options={{
