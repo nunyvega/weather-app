@@ -1,6 +1,7 @@
 import styled from "styled-components/native";
+import { stringEnglish, stringSpanish } from "../translations";
 
-const ForecastSearch = ({ city, setCity, setMyCities }) => {
+const ForecastSearch = ({ city, setCity, setMyCities, language }) => {
   const handleSubmit = () => {
     // don't store duplicate values, only store unique values
     setMyCities((prevCities) =>
@@ -15,7 +16,7 @@ const ForecastSearch = ({ city, setCity, setMyCities }) => {
       <SearchCity
         onChangeText={setCity}
         value={city}
-        placeholder={"Search for your city"}
+        placeholder={language === "english" ? stringEnglish.searchPlaceholder : stringSpanish.searchPlaceholder}
         onSubmitEditing={handleSubmit}
       />
     </ContainerSearch>
@@ -28,12 +29,15 @@ const ContainerSearch = styled.View`
 `;
 
 const SearchCity = styled.TextInput`
+background-color: ${({ theme }) => theme.contrastBackground};
+  opacity: 0.6;
   height: 50px;
   border: 3px solid ${({ theme }) => theme.background};
   border-radius: 10px;
   padding: 10px;
   color: ${({ theme }) => theme.text};
   font-size: 20px;
+  font-color: ${({ theme }) => theme.text};
 `;
 
 export default ForecastSearch;

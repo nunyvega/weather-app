@@ -59,6 +59,7 @@ const Home = ({
             city={city}
             setCity={setCity}
             setMyCities={setMyCities}
+            language={language}
           />
           <ScrollView
             contentContainerStyle={{ flexGrow: 1 }}
@@ -201,8 +202,8 @@ const Details = styled.Text`
 `;
 
 const NoWeather = styled.Text`
-  font-size: 40px;
-  line-height: 90px;
+  font-size: 35px;
+  line-height: 70px;
   font-weight: bold;
   text-align: center;
   spacing: 10px;

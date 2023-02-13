@@ -14,6 +14,7 @@ const stringEnglish = {
     toggleLanguage: "Toggle Language to 🇪🇸",
     NoWeatherToShow: `No weather to show.${"\n"} Add your first city!`,
     languageCode: "en",
+    searchPlaceholder: "Search for a city",
   };
   
   const stringSpanish = {
@@ -33,6 +34,7 @@ const stringEnglish = {
     toggleLanguage: "Cambiar idioma a 🇬🇧",
     NoWeatherToShow: `Sin clima que mostrar.${"\n"} Agregue una ciudad!`,
     languageCode: "es",
+    searchPlaceholder: "Buscar una ciudad",
   };
 
     export { stringEnglish, stringSpanish };
