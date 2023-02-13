@@ -10,6 +10,7 @@ import {
 import { stringEnglish, stringSpanish } from "../translations";
 import { lightTheme, darkTheme } from "../themes";
 import styled from "styled-components/native";
+import Toggles from "./Toggles";
 
 const WeatherDetails = ({
   theme,
@@ -58,23 +59,11 @@ const WeatherDetails = ({
       >
         <SafeAreaView style={{ flex: 1 }}>
           <AppTitle>Lovely Weather 🌡️</AppTitle>
-          <TogglesContainer>
-            <ToggleLanguageButton onPress={toggleLanguage}>
-              <ToggleLanguageButtonText>
-                {language === "english"
-                  ? stringEnglish.toggleLanguage
-                  : stringSpanish.toggleLanguage}
-              </ToggleLanguageButtonText>
-            </ToggleLanguageButton>
-            <ToggleThemeButton onPress={toggleTheme}>
-              <ToggleThemeButtonText>
-                {language === "english"
-                  ? stringEnglish.toggleTheme
-                  : stringSpanish.toggleTheme}
-                {theme === "light" ? "\uD83C\uDF1A" : "\uD83C\uDF1D"}{" "}
-              </ToggleThemeButtonText>
-            </ToggleThemeButton>
-          </TogglesContainer>
+          <Toggles
+            toggleTheme={toggleTheme}
+            toggleLanguage={toggleLanguage}
+            language={language}
+          />
           <ScrollView
             contentContainerStyle={{ flexGrow: 1 }}
             style={{ flex: 1 }}
@@ -238,7 +227,7 @@ const TogglesContainer = styled.View`
   display: flex;
 `;
 
-const ToggleThemeButton = styled.TouchableOpacity`
+const ToggleButton = styled.TouchableOpacity`
   flex: 1;
   padding: 10px;
   margin: 10px;
@@ -247,23 +236,7 @@ const ToggleThemeButton = styled.TouchableOpacity`
   align-self: flex-end;
 `;
 
-const ToggleThemeButtonText = styled.Text`
-  font-size: 14px;
-  font-weight: bold;
-  text-align: center;
-  color: ${({ theme }) => theme.text};
-`;
-
-const ToggleLanguageButton = styled.TouchableOpacity`
-  flex: 1;
-  padding: 10px;
-  margin: 10px;
-  background-color: ${({ theme }) => theme.background};
-  border-radius: 10px;
-  align-self: flex-end;
-`;
-
-const ToggleLanguageButtonText = styled.Text`
+const ToggleButtonText = styled.Text`
   font-size: 14px;
   font-weight: bold;
   text-align: center;
@@ -279,8 +252,7 @@ const CityView = styled.View`
   margin-bottom: 20px;
   padding: 20px;
   background-color: ${({ theme }) => theme.background};
-  border-radius: 10px;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
 `;
 
 const DetailsBox = styled.View`
