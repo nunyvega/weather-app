@@ -11,7 +11,7 @@ import { fetchWeather, storeData, getData } from "./apiFunctions";
 const Stack = createStackNavigator();
 
 const App = () => {
-  const [city, setCity] = useState("Add your city here");
+  const [city, setCity] = useState("");
   const [myCities, setMyCities] = useState([]);
   const [weatherData, setWeatherData] = useState([]);
   const [theme, setTheme] = useState("light");

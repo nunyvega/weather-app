@@ -81,6 +81,7 @@ const WeatherDetails = ({
           >
             <DetailedForecastContainer>
               <CityView>
+              <DetailsRow>
                 <CityName>{name}</CityName>
                 <CityTempView>
                   {weather && (
@@ -92,9 +93,14 @@ const WeatherDetails = ({
                       resizeMode="contain"
                     />
                   )}
-                  <CityDegrees>{temp}°C</CityDegrees>
-                  <Description>{weather && weather[0].description}</Description>
                 </CityTempView>
+                </DetailsRow>
+                <DetailsRow>
+                <CityDegrees>{temp}°C</CityDegrees>
+
+                <Description>{weather && weather[0].description}</Description>
+                </DetailsRow>
+
                 <DetailedInfoContainer>
                   <DetailsRow>
                     <DetailsBox>
@@ -175,7 +181,7 @@ const AppTitle = styled.Text`
 `;
 
 const CityName = styled.Text`
-  font-size: 35px;
+  font-size: 44px;
   font-weight: bold;
   align-self: center;
   color: ${({ theme }) => theme.text};
@@ -190,12 +196,12 @@ const CityTempView = styled.View`
 `;
 
 const WeatherIcon = styled.Image`
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
 `;
 
 const CityDegrees = styled.Text`
-  font-size: 44px;
+  font-size: 40px;
   font-weight: bold;
   margin-left: 10px;
   margin-right: 10px;
@@ -203,8 +209,10 @@ const CityDegrees = styled.Text`
 `;
 
 const Description = styled.Text`
-  font-size: 44px;
-  color: ${({ theme }) => theme.text};
+font-size: 40px;
+  font-weight: bold;
+  margin-left: 10px;
+  margin-right: 10px;  color: ${({ theme }) => theme.text};
 `;
 
 const DetailedInfoContainer = styled.View`

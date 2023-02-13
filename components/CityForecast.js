@@ -16,16 +16,20 @@ const CityForecast = ({ cityWeather, setMyCities, index }) => {
 
   return (
     <CityView>
-      <CityName>{name}</CityName>
       <CityTempView>
+
         {weather && (
           <WeatherIcon
             source={{
-              uri: `http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`,
+              uri: `http://openweathermap.org/img/wn/${weather[0].icon}@4x.png`,
             }}
             resizeMode={"contain"}
           />
         )}
+              <CityName>{name}</CityName>
+                </CityTempView>
+
+        <CityTempView>
         <CityDegrees>{temp}°C</CityDegrees>
         <Description>{weather && weather[0].description}</Description>
       </CityTempView>
@@ -37,42 +41,45 @@ const CityForecast = ({ cityWeather, setMyCities, index }) => {
 };
 
 const CityView = styled.View`
-  margin-bottom: 20px;
-  padding: 20px;
+  padding: 19px;
   background-color: ${({ theme }) => theme.background};
   border-radius: 10px;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
 `;
 
 const CityName = styled.Text`
-  font-size: 35px;
+  font-size: 30px;
   font-weight: bold;
   align-self: center;
   color: ${({ theme }) => theme.text};
+  text-align: center;
 `;
 
 const CityTempView = styled.View`
+  padding-right: 20px;
+  margin-right: 20px;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  margin: 10px 0;
 `;
 
 const WeatherIcon = styled.Image`
-  width: 50px;
-  height: 50px;
+  width: 90px;
+  height: 90px;
 `;
 
 const CityDegrees = styled.Text`
-  font-size: 48px;
+  font-size: 30px;
   font-weight: bold;
-  margin-left: 10px;
   color: ${({ theme }) => theme.text};
 `;
 
 const Description = styled.Text`
-  font-size: 18px;
+  font-size: 26px;
   color: ${({ theme }) => theme.text};
+  justify-content: center;
+  text-align: center;
+  self-align: center;
 `;
 
 const CloseButton = styled.TouchableOpacity`
@@ -83,7 +90,7 @@ const CloseButton = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   position: absolute;
-  margin: 20px;
+  margin: 10px;
   right: 0;
 `;
 
