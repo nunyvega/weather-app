@@ -1,3 +1,4 @@
+// Description: This component is responsible for displaying the toggle buttons for the theme and language
 import { stringEnglish, stringSpanish } from "../translations";
 import { lightTheme, darkTheme } from "../themes";
 import styled from "styled-components/native";

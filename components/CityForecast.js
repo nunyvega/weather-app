@@ -1,3 +1,4 @@
+// Description: This component is used to display the forecast for a city
 import styled from "styled-components/native";
 
 const CityForecast = ({ cityWeather, setMyCities, index }) => {

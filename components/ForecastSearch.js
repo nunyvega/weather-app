@@ -1,11 +1,10 @@
+// Description: This component is used to search for a city and add it to the list of cities
 import styled from "styled-components/native";
 import { stringEnglish, stringSpanish } from "../translations";
 
 const ForecastSearch = ({ city, setCity, setMyCities, language }) => {
-
   // handle the submit event of the search input
   const handleSubmit = () => {
-
     // add the city to the list of cities
     // don't store duplicate values, only store unique values
     setMyCities((prevCities) =>

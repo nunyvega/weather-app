@@ -1,10 +1,10 @@
+// Description: This component displays the weather details for a city
 import {
   ScrollView,
   SafeAreaView,
   ImageBackground,
   View,
   Text,
-  Alert,
   Button,
 } from "react-native";
 import { stringEnglish, stringSpanish } from "../translations";
@@ -22,7 +22,9 @@ const WeatherDetails = ({
   toggleLanguage,
 }) => {
   const cityWeather = weatherData[index];
-  if ( !cityWeather) {
+
+  // if the weather data is not loaded yet, display a loading message
+  if (!cityWeather) {
     return (
       <ImageBackground
         source={theme === "light" ? lightTheme.bgImage : darkTheme.bgImage}
@@ -42,6 +44,9 @@ const WeatherDetails = ({
     );
   }
 
+  // destructure the weather data
+  // if the data is not available, set it to null
+  // this is to avoid errors when the data is not available
   const { name, weather, main, wind } = cityWeather;
   const temp = main ? Math.round(main.temp) : null;
   const feelsLike = main ? Math.round(main.feels_like) : null;
@@ -70,30 +75,29 @@ const WeatherDetails = ({
           >
             <DetailedForecastContainer>
               <CityView>
-              <DetailsRow>
-                <CityName>{name}</CityName>
-                <CityTempView>
-                  {weather && (
-                    <WeatherIcon
-                      source={{
-                        //Using format from  https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2
-                        uri: `http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`,
-                      }}
-                      resizeMode="contain"
-                    />
-                  )}
-                </CityTempView>
+                <DetailsRow>
+                  <CityName>{name}</CityName>
+                  <CityTempView>
+                    {weather && (
+                      <WeatherIcon
+                        source={{
+                          //Using format from  https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2
+                          uri: `http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`,
+                        }}
+                        resizeMode="contain"
+                      />
+                    )}
+                  </CityTempView>
                 </DetailsRow>
                 <DetailsRow>
-                <CityDegrees>{temp}°C</CityDegrees>
-
-                <Description>{weather && weather[0].description}</Description>
+                  <CityDegrees>{temp}°C</CityDegrees>
+                  <Description>{weather && weather[0].description}</Description>
                 </DetailsRow>
-
                 <DetailedInfoContainer>
                   <DetailsRow>
                     <DetailsBox>
                       <Subtitle>
+                        {/* display the correct string based on the language */}
                         {language === "english"
                           ? stringEnglish.feelsLike
                           : stringSpanish.feelsLike}
@@ -156,6 +160,7 @@ const WeatherDetails = ({
   );
 };
 
+// styled components for the weather details
 const Container = styled.View`
   flex: 1;
   background-color: ${({ theme }) => theme.background};
@@ -198,10 +203,11 @@ const CityDegrees = styled.Text`
 `;
 
 const Description = styled.Text`
-font-size: 40px;
+  font-size: 40px;
   font-weight: bold;
   margin-left: 10px;
-  margin-right: 10px;  color: ${({ theme }) => theme.text};
+  margin-right: 10px;
+  color: ${({ theme }) => theme.text};
 `;
 
 const DetailedInfoContainer = styled.View`

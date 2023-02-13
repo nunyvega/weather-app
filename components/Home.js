@@ -1,3 +1,4 @@
+// Description: Home component that renders the main screen of the app
 import styled from "styled-components/native";
 import {
   ScrollView,
@@ -29,7 +30,7 @@ const Home = ({
   const handlePress = (weatherData, localIndex, setIndex) => {
     // set the index of the city forecast component that was pressed
     setIndex(localIndex);
-      // navigate to the weather details screen
+    // navigate to the weather details screen
     navigation.navigate({ name: "WeatherDetails" });
   };
 
@@ -41,11 +42,13 @@ const Home = ({
       >
         <SafeAreaView style={{ flex: 1 }}>
           <AppTitle>Lovely Weather 🌡️</AppTitle>
+          {/* Toggles component for toggling the theme and language */}
           <Toggles
             toggleTheme={toggleTheme}
             toggleLanguage={toggleLanguage}
             language={language}
           />
+          {/* ForecastSearch component to search and add cities to the list */}
           <ForecastSearch
             city={city}
             setCity={setCity}
@@ -56,7 +59,7 @@ const Home = ({
             contentContainerStyle={{ flexGrow: 1 }}
             style={{ flex: 1 }}
           >
-            <ForecastContainer>
+              {/* if there is weather data, map over the weather data and render a CityForecast component for each city */}
               {weatherData.length ? (
                 weatherData.map((data, localIndex) => (
                   <CityForecastContainer
@@ -71,14 +74,14 @@ const Home = ({
                   </CityForecastContainer>
                 ))
               ) : (
-                <NoWeather>
+                // if there is no weather data, render a message to the user
+                <NoCityForecast>
                   {language === "english"
                     ? stringEnglish.NoWeatherToShow
                     : stringSpanish.NoWeatherToShow}
                   {"\n"} 🌙 ❄️ ☔️ 🌈 🌤️
-                </NoWeather>
+                </NoCityForecast>
               )}
-            </ForecastContainer>
           </ScrollView>
         </SafeAreaView>
       </ImageBackground>
@@ -88,8 +91,7 @@ const Home = ({
 
 // styled components for the home component
 const CityForecastContainer = styled.TouchableOpacity`
-  margin: 10px;
-  width: auto;
+  margin: 20px;
 `;
 
 const Container = styled.View`
@@ -106,12 +108,11 @@ const Details = styled.Text`
   color: ${({ theme }) => theme.text};
 `;
 
-const NoWeather = styled.Text`
+const NoCityForecast = styled.Text`
   font-size: 35px;
   line-height: 70px;
   font-weight: bold;
   text-align: center;
-  spacing: 10px;
   margin-top: 10%;
   color: ${({ theme }) => theme.text};
 `;
@@ -123,4 +124,5 @@ const AppTitle = styled.Text`
   margin: 25px;
   color: ${({ theme }) => theme.text};
 `;
+
 export default Home;
