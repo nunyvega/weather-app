@@ -1,3 +1,4 @@
+// Description: This file contains the string translations for the app
 const stringEnglish = {
     home: "Home",
     detailedWeather: "Detailed Weather",

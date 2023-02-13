@@ -48,8 +48,8 @@ const App = () => {
   };
 
   return (
-    {/*pass the theme to the theme provider and stack navigator*/}
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      {/*pass the theme to the theme provider and stack navigator*/}
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{
