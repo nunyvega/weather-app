@@ -8,8 +8,8 @@ import {
   Text,
   Button,
 } from "react-native";
-import { stringEnglish, stringSpanish } from "../translations";
-import { lightTheme, darkTheme } from "../themes";
+import { stringEnglish, stringSpanish } from "../lib/translations";
+import { lightTheme, darkTheme } from "../lib/themes";
 import SearchBar from "./SearchBar";
 import CityForecast from "./CityForecast";
 import Toggles from "./Toggles";

@@ -1,6 +1,6 @@
 // Description: This component is responsible for displaying the toggle buttons for the theme and language
-import { stringEnglish, stringSpanish } from "../translations";
-import { lightTheme, darkTheme } from "../themes";
+import { stringEnglish, stringSpanish } from "../lib/translations";
+import { lightTheme, darkTheme } from "../lib/themes";
 import styled from "styled-components/native";
 
 const Toggles = ({ theme, toggleTheme, language, toggleLanguage }) => {

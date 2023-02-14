@@ -7,8 +7,8 @@ import {
   Text,
   Button,
 } from "react-native";
-import { stringEnglish, stringSpanish } from "../translations";
-import { lightTheme, darkTheme } from "../themes";
+import { stringEnglish, stringSpanish } from "../lib/translations";
+import { lightTheme, darkTheme } from "../lib/themes";
 import styled from "styled-components/native";
 import Toggles from "./Toggles";
 

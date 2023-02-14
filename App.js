@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
-import { stringEnglish, stringSpanish } from "./translations";
-import { lightTheme, darkTheme } from "./themes";
+import { stringEnglish, stringSpanish } from "./lib/translations";
+import { lightTheme, darkTheme } from "./lib/themes";
 import Home from "./components/Home";
 import WeatherDetails from "./components/WeatherDetails";
-import { fetchWeather, storeData, getData } from "./apiFunctions";
+import { fetchWeather, storeData, getData } from "./lib/apiFunctions";
 
 // create the stack navigator to navigate between the home and weather details screens
 const Stack = createStackNavigator();

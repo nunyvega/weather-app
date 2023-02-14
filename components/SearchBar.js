@@ -1,6 +1,6 @@
 // Description: This component is used to search for a city and add it to the list of cities
 import styled from "styled-components/native";
-import { stringEnglish, stringSpanish } from "../translations";
+import { stringEnglish, stringSpanish } from "../lib/translations";
 
 const SearchBar = ({ city, setCity, setMyCities, language }) => {
   // handle the submit event of the search input
@@ -45,6 +45,7 @@ const CitySearch = styled.TextInput`
   font-size: 20px;
   font-weight: bold;
   text-align: center;
+  color: ${({ theme }) => theme.text};
   font-color: ${({ theme }) => theme.text};
 `;
 
