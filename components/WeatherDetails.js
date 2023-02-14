@@ -31,12 +31,7 @@ const WeatherDetails = ({
         style={{ width: "100%", height: "100%" }}
       >
         <Text
-          style={{
-            fontSize: 50,
-            color: "white",
-            textAlign: "center",
-            marginTop: 140,
-          }}
+
         >
           Loading{"\n"} weather data{"\n"}-----{"\n"}maybe try again
         </Text>
@@ -175,27 +170,35 @@ const AppTitle = styled.Text`
 `;
 
 const CityName = styled.Text`
-  font-size: 44px;
+  text-align: left;
+  justify-content: center;
+  padding: 5px;
+  margin: 10px;
+  font-size: 30px;
   font-weight: bold;
   align-self: center;
   color: ${({ theme }) => theme.text};
 `;
 
 const CityTempView = styled.View`
+  padding: 5px;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  margin: 10px 0;
+  margin: 10px 0px;
   height: 100px;
 `;
 
 const WeatherIcon = styled.Image`
   width: 80px;
   height: 80px;
+  padding: 5px;
+
 `;
 
 const CityDegrees = styled.Text`
-  font-size: 40px;
+  padding: 5px;
+  font-size: 25px;
   font-weight: bold;
   margin-left: 10px;
   margin-right: 10px;
@@ -203,7 +206,9 @@ const CityDegrees = styled.Text`
 `;
 
 const Description = styled.Text`
-  font-size: 40px;
+padding: 5px;
+text-align: right;
+  font-size: 25px;
   font-weight: bold;
   margin-left: 10px;
   margin-right: 10px;
@@ -211,16 +216,18 @@ const Description = styled.Text`
 `;
 
 const DetailedInfoContainer = styled.View`
-  margin: 10px 0;
+  margin: 10px 0px;
 `;
 
 const DetailsRow = styled.View`
-  margin: 10px 0;
+  align-items: center;
+  flex-direction: row;
+  margin: 10px;
   border-width: 1px;
   border-radius: 20px;
   border-color: ${({ theme }) => theme.background};
   background-color: ${({ theme }) => theme.background};
-  padding: 10px;
+  padding: 5px;
   flex-direction: row;
   justify-content: space-around;
   margin-bottom: 5px;

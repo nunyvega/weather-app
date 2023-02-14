@@ -49,41 +49,38 @@ const CityForecast = ({ cityWeather, setMyCities, index }) => {
 
 // styled components for the city forecast component
 const CityView = styled.View`
-  padding: 19px;
+  padding: 10px;
   background-color: ${({ theme }) => theme.background};
   border-radius: 10px;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
 `;
 
 const CityTempView = styled.View`
-  padding-right: 20px;
   margin-right: 20px;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
 `;
 
 const WeatherIcon = styled.Image`
-  width: 90px;
-  height: 90px;
+  width: 60px;
+  height: 60px;
 `;
 
 const CityName = styled.Text`
-  font-size: 30px;
+  font-size: 22px;
   font-weight: bold;
-  align-self: center;
   color: ${({ theme }) => theme.text};
-  text-align: center;
 `;
 
 const CityDegrees = styled.Text`
-  font-size: 30px;
+  font-size: 22px;
   font-weight: bold;
+  align-self: center;
   color: ${({ theme }) => theme.text};
 `;
 
 const Description = styled.Text`
-  font-size: 26px;
+  font-size: 22px;
   color: ${({ theme }) => theme.text};
   justify-content: center;
   text-align: center;

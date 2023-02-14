@@ -43,7 +43,7 @@ const ToggleButton = styled.TouchableOpacity`
 `;
 
 const ToggleButtonText = styled.Text`
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
   text-align: center;
   color: ${({ theme }) => theme.text};

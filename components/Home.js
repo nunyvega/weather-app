@@ -91,27 +91,16 @@ const Home = ({
 
 // styled components for the home component
 const CityForecastContainer = styled.TouchableOpacity`
-  margin: 20px;
+  margin: 10px 20px;
 `;
 
 const Container = styled.View`
-  flex: 1;
   background-color: ${({ theme }) => theme.background};
 `;
 
-const ForecastContainer = styled.View`
-  margin: 10px;
-`;
-
-const Details = styled.Text`
-  font-size: 16px;
-  color: ${({ theme }) => theme.text};
-`;
-
 const NoCityForecast = styled.Text`
-  font-size: 35px;
+  font-size: 30px;
   line-height: 70px;
-  font-weight: bold;
   text-align: center;
   margin-top: 10%;
   color: ${({ theme }) => theme.text};
