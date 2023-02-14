@@ -28,9 +28,7 @@ const Toggles = ({ theme, toggleTheme, language, toggleLanguage }) => {
 
 const TogglesContainer = styled.View`
   flex-direction: row;
-  justify-content: space-around;
   margin: 10px;
-  display: flex;
 `;
 
 const ToggleButton = styled.TouchableOpacity`
@@ -39,12 +37,10 @@ const ToggleButton = styled.TouchableOpacity`
   margin: 10px;
   background-color: ${({ theme }) => theme.background};
   border-radius: 10px;
-  align-self: flex-end;
 `;
 
 const ToggleButtonText = styled.Text`
-  font-size: 12px;
-  font-weight: bold;
+  font-size: 15px;
   text-align: center;
   color: ${({ theme }) => theme.text};
 `;

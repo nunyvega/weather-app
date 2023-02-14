@@ -77,7 +77,7 @@ const fetchWeather = async (
 };
 
 // function to store data in async storage using the key and value parameters
-// this function is used in the ForecastSearch component to store the list of cities
+// this function is used in the SearchBar component to store the list of cities
 // and in the Settings component to store the theme and language settings
 const storeData = async (key, value) => {
   try {
@@ -86,9 +86,8 @@ const storeData = async (key, value) => {
       ? (values = JSON.stringify(value))
       : (values = value);
     await AsyncStorage.setItem(key, values);
-    console.log("stored values in async storage" + key + values);
   } catch (e) {
-    console.log("cagao");
+    console.error(e);
   }
 };
 

@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { stringEnglish, stringSpanish } from "../translations";
 import { lightTheme, darkTheme } from "../themes";
-import ForecastSearch from "./ForecastSearch";
+import SearchBar from "./SearchBar";
 import CityForecast from "./CityForecast";
 import Toggles from "./Toggles";
 
@@ -47,9 +47,10 @@ const Home = ({
             toggleTheme={toggleTheme}
             toggleLanguage={toggleLanguage}
             language={language}
+            theme={theme}
           />
-          {/* ForecastSearch component to search and add cities to the list */}
-          <ForecastSearch
+          {/* SearchBar component to search and add cities to the list */}
+          <SearchBar
             city={city}
             setCity={setCity}
             setMyCities={setMyCities}

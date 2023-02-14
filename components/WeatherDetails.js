@@ -30,9 +30,7 @@ const WeatherDetails = ({
         source={theme === "light" ? lightTheme.bgImage : darkTheme.bgImage}
         style={{ width: "100%", height: "100%" }}
       >
-        <Text
-
-        >
+        <Text>
           Loading{"\n"} weather data{"\n"}-----{"\n"}maybe try again
         </Text>
       </ImageBackground>
@@ -63,6 +61,7 @@ const WeatherDetails = ({
             toggleTheme={toggleTheme}
             toggleLanguage={toggleLanguage}
             language={language}
+            theme={theme}
           />
           <ScrollView
             contentContainerStyle={{ flexGrow: 1 }}
@@ -74,7 +73,7 @@ const WeatherDetails = ({
                   <CityName>{name}</CityName>
                   <CityTempView>
                     {weather && (
-                      <WeatherIcon
+                      <ApiImg
                         source={{
                           //Using format from  https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2
                           uri: `http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`,
@@ -88,64 +87,61 @@ const WeatherDetails = ({
                   <CityDegrees>{temp}°C</CityDegrees>
                   <Description>{weather && weather[0].description}</Description>
                 </DetailsRow>
-                <DetailedInfoContainer>
-                  <DetailsRow>
-                    <DetailsBox>
-                      <Subtitle>
-                        {/* display the correct string based on the language */}
-                        {language === "english"
-                          ? stringEnglish.feelsLike
-                          : stringSpanish.feelsLike}
-                      </Subtitle>
-                      <Details>{feelsLike}°C</Details>
-                    </DetailsBox>
-                    <DetailsBox>
-                      <Subtitle>
-                        {language === "english"
-                          ? stringEnglish.humidity
-                          : stringSpanish.humidity}
-                      </Subtitle>
-                      <Details>{humidity}%</Details>
-                    </DetailsBox>
-                  </DetailsRow>
-                  <DetailsRow>
-                    <DetailsBox>
-                      <Subtitle>
-                        {language === "english"
-                          ? stringEnglish.tempMin
-                          : stringSpanish.tempMin}
-                      </Subtitle>
-                      <Details>{tempMin}°C</Details>
-                    </DetailsBox>
-
-                    <DetailsBox>
-                      <Subtitle>
-                        {language === "english"
-                          ? stringEnglish.tempMax
-                          : stringSpanish.tempMax}
-                      </Subtitle>
-                      <Details>{tempMax}°C</Details>
-                    </DetailsBox>
-                  </DetailsRow>
-                  <DetailsRow>
-                    <DetailsBox>
-                      <Subtitle>
-                        {language === "english"
-                          ? stringEnglish.rain
-                          : stringSpanish.rain}
-                      </Subtitle>
-                      <Details>{rain} MM</Details>
-                    </DetailsBox>
-                    <DetailsBox>
-                      <Subtitle>
-                        {language === "english"
-                          ? stringEnglish.wind
-                          : stringSpanish.wind}
-                      </Subtitle>
-                      <Details>{windSpeed}m/s</Details>
-                    </DetailsBox>
-                  </DetailsRow>
-                </DetailedInfoContainer>
+                <DetailsRow>
+                  <DetailsView>
+                    <Subtitle>
+                      {/* display the correct string based on the language */}
+                      {language === "english"
+                        ? stringEnglish.feelsLike
+                        : stringSpanish.feelsLike}
+                    </Subtitle>
+                    <Details>{feelsLike}°C</Details>
+                  </DetailsView>
+                  <DetailsView>
+                    <Subtitle>
+                      {language === "english"
+                        ? stringEnglish.humidity
+                        : stringSpanish.humidity}
+                    </Subtitle>
+                    <Details>{humidity}%</Details>
+                  </DetailsView>
+                </DetailsRow>
+                <DetailsRow>
+                  <DetailsView>
+                    <Subtitle>
+                      {language === "english"
+                        ? stringEnglish.tempMin
+                        : stringSpanish.tempMin}
+                    </Subtitle>
+                    <Details>{tempMin}°C</Details>
+                  </DetailsView>
+                  <DetailsView>
+                    <Subtitle>
+                      {language === "english"
+                        ? stringEnglish.tempMax
+                        : stringSpanish.tempMax}
+                    </Subtitle>
+                    <Details>{tempMax}°C</Details>
+                  </DetailsView>
+                </DetailsRow>
+                <DetailsRow>
+                  <DetailsView>
+                    <Subtitle>
+                      {language === "english"
+                        ? stringEnglish.rain
+                        : stringSpanish.rain}
+                    </Subtitle>
+                    <Details>{rain} MM</Details>
+                  </DetailsView>
+                  <DetailsView>
+                    <Subtitle>
+                      {language === "english"
+                        ? stringEnglish.wind
+                        : stringSpanish.wind}
+                    </Subtitle>
+                    <Details>{windSpeed}m/s</Details>
+                  </DetailsView>
+                </DetailsRow>
               </CityView>
             </DetailedForecastContainer>
           </ScrollView>
@@ -157,7 +153,6 @@ const WeatherDetails = ({
 
 // styled components for the weather details
 const Container = styled.View`
-  flex: 1;
   background-color: ${({ theme }) => theme.background};
 `;
 
@@ -170,9 +165,7 @@ const AppTitle = styled.Text`
 `;
 
 const CityName = styled.Text`
-  text-align: left;
-  justify-content: center;
-  padding: 5px;
+  padding: 10px;
   margin: 10px;
   font-size: 30px;
   font-weight: bold;
@@ -182,23 +175,19 @@ const CityName = styled.Text`
 
 const CityTempView = styled.View`
   padding: 5px;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
   margin: 10px 0px;
-  height: 100px;
+  width: 100px;
 `;
 
-const WeatherIcon = styled.Image`
+const ApiImg = styled.Image`
   width: 80px;
   height: 80px;
-  padding: 5px;
-
 `;
 
 const CityDegrees = styled.Text`
   padding: 5px;
-  font-size: 25px;
+  font-size: 22px;
+  text-align: center;
   font-weight: bold;
   margin-left: 10px;
   margin-right: 10px;
@@ -206,69 +195,35 @@ const CityDegrees = styled.Text`
 `;
 
 const Description = styled.Text`
-padding: 5px;
-text-align: right;
-  font-size: 25px;
+  padding: 5px;
+  font-size: 22px;
   font-weight: bold;
-  margin-left: 10px;
-  margin-right: 10px;
   color: ${({ theme }) => theme.text};
 `;
 
-const DetailedInfoContainer = styled.View`
-  margin: 10px 0px;
-`;
-
 const DetailsRow = styled.View`
-  align-items: center;
   flex-direction: row;
   margin: 10px;
   border-width: 1px;
-  border-radius: 20px;
+  border-radius: 15px;
   border-color: ${({ theme }) => theme.background};
   background-color: ${({ theme }) => theme.background};
-  padding: 5px;
-  flex-direction: row;
+  padding: 8px;
   justify-content: space-around;
   margin-bottom: 5px;
 `;
 
-const TogglesContainer = styled.View`
-  flex-direction: row;
-  justify-content: space-around;
-  margin: 10px;
-  display: flex;
-`;
-
-const ToggleButton = styled.TouchableOpacity`
-  flex: 1;
-  padding: 10px;
-  margin: 10px;
-  background-color: ${({ theme }) => theme.background};
-  border-radius: 10px;
-  align-self: flex-end;
-`;
-
-const ToggleButtonText = styled.Text`
-  font-size: 14px;
-  font-weight: bold;
-  text-align: center;
-  color: ${({ theme }) => theme.text};
-`;
-
 const DetailedForecastContainer = styled.View`
-  margin: 40px 10px;
-  padding: 10px;
+wi
+  margin: 20px 10px;
 `;
 
 const CityView = styled.View`
-  margin-bottom: 20px;
   padding: 20px;
-  background-color: ${({ theme }) => theme.background};
   border-radius: 20px;
 `;
 
-const DetailsBox = styled.View`
+const DetailsView = styled.View`
   align-items: center;
 `;
 

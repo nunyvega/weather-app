@@ -25,7 +25,7 @@ const CityForecast = ({ cityWeather, setMyCities, index }) => {
     <CityView>
       <CityTempView>
         {weather && (
-          <WeatherIcon
+          <ApiImg
             source={{
               // use the icon code from the weather object to get the icon, more info in:
               // https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2
@@ -57,13 +57,14 @@ const CityView = styled.View`
 const CityTempView = styled.View`
   margin-right: 20px;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
+  padding: 0 20px;
 `;
 
-const WeatherIcon = styled.Image`
-  width: 60px;
-  height: 60px;
+const ApiImg = styled.Image`
+  width: 70px;
+  height: 70px;
 `;
 
 const CityName = styled.Text`
@@ -75,23 +76,19 @@ const CityName = styled.Text`
 const CityDegrees = styled.Text`
   font-size: 22px;
   font-weight: bold;
-  align-self: center;
   color: ${({ theme }) => theme.text};
 `;
 
 const Description = styled.Text`
   font-size: 22px;
   color: ${({ theme }) => theme.text};
-  justify-content: center;
-  text-align: center;
-  self-align: center;
 `;
 
 const CloseButton = styled.TouchableOpacity`
   width: 30px;
   height: 30px;
   background-color: ${({ theme }) => theme.contrastBackground};
-  border-radius: 10px;
+  border-radius: 20px;
   align-items: center;
   justify-content: center;
   position: absolute;

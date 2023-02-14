@@ -2,7 +2,7 @@
 import styled from "styled-components/native";
 import { stringEnglish, stringSpanish } from "../translations";
 
-const ForecastSearch = ({ city, setCity, setMyCities, language }) => {
+const SearchBar = ({ city, setCity, setMyCities, language }) => {
   // handle the submit event of the search input
   const handleSubmit = () => {
     // add the city to the list of cities
@@ -17,7 +17,7 @@ const ForecastSearch = ({ city, setCity, setMyCities, language }) => {
   // return the search input component, add placeholder text based on the language
   return (
     <ContainerSearch>
-      <SearchCity
+      <CitySearch
         onChangeText={setCity}
         value={city}
         placeholder={
@@ -33,20 +33,19 @@ const ForecastSearch = ({ city, setCity, setMyCities, language }) => {
 
 // styled components for the forecast search component
 const ContainerSearch = styled.View`
-  padding: 10px;
+  padding: 20px;
   margin-bottom: 10px;
 `;
 
-const SearchCity = styled.TextInput`
+const CitySearch = styled.TextInput`
   background-color: ${({ theme }) => theme.contrastBackground};
-  opacity: 0.6;
+  opacity: 0.8;
   height: 50px;
-  border: 3px solid ${({ theme }) => theme.background};
   border-radius: 10px;
-  padding: 10px;
-  color: ${({ theme }) => theme.text};
   font-size: 20px;
+  font-weight: bold;
+  text-align: center;
   font-color: ${({ theme }) => theme.text};
 `;
 
-export default ForecastSearch;
+export default SearchBar;
