@@ -33,7 +33,7 @@ const App = () => {
       fetchWeather(city, language, myCities, setMyCities, setWeatherData, setCity);
     });
     storeData("@myCities", myCities);
-  }, [myCities]);
+  }, [myCities, language]);
 
   // toggle the language between english and spanish and store the language in async storage
   const toggleLanguage = () => {
