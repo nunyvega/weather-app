@@ -62,7 +62,8 @@ const Home = ({
           >
               {/* if there is weather data, map over the weather data and render a CityForecast component for each city */}
               {weatherData.length ? (
-                weatherData.map((data, localIndex) => (
+                weatherData.map((data, localIndex) => {
+                 return (
                   <CityForecastContainer
                     key={localIndex}
                     onPress={() => handlePress(data, localIndex, setIndex)}
@@ -73,7 +74,7 @@ const Home = ({
                       index={localIndex}
                     />
                   </CityForecastContainer>
-                ))
+                )})
               ) : (
                 // if there is no weather data, render a message to the user
                 <NoCityForecast>

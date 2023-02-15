@@ -29,9 +29,20 @@ const App = () => {
   // fetch the weather data for each city in myCities when myCities changes
   useEffect(() => {
     setWeatherData([]);
-    myCities.forEach((city) => {
-      fetchWeather(city, language, myCities, setMyCities, setWeatherData, setCity);
-    });
+    const promises = myCities.map(city =>
+      fetchWeather(city, language, setCity, myCities, setMyCities)
+    );
+    // Using this method to guarantee that cities are rendered in the order they were added
+    Promise.all(promises)
+      .then(results => {
+        // Filter out any null values
+        const orderedData = results.filter(Boolean);
+        setWeatherData(orderedData);
+      })
+      .catch(error => {
+        console.error(error);
+        // Handle error as needed
+      });
     storeData("@myCities", myCities);
   }, [myCities, language]);
 
