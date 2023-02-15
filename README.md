@@ -76,4 +76,4 @@ Lovely Weather uses styled-components for styling. The styles for each component
 
 
 ## Future Work
-In the future, I plan to add more customization options to the app, such as the ability to change the units for temperature and wind speed. I also plan to add more detailed weather information, such as the chance of rain and humidity. If you have any suggestions for features you'd like to see in the app, please let me know!
+In the future, I plan to add more customization options to the app, such as the ability to change the units for temperature and wind speed. I also plan to add more detailed weather information, such as the chance of rain and humidity. If you have any suggestions for features you'd like to see in the app, please let me know :)
