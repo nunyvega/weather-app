@@ -46,7 +46,6 @@ const CitySearch = styled.TextInput`
   font-weight: bold;
   text-align: center;
   color: ${({ theme }) => theme.text};
-  font-color: ${({ theme }) => theme.text};
 `;
 
 export default SearchBar;

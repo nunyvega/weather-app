@@ -88,6 +88,7 @@ const App = () => {
             {({ navigation }) => (
               <Home
                 city={city}
+                myCities={myCities}
                 setCity={setCity}
                 setMyCities={setMyCities}
                 weatherData={weatherData}

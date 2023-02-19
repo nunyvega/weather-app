@@ -16,6 +16,7 @@ import Toggles from "./Toggles";
 
 const Home = ({
   city,
+  myCities,
   setCity,
   setMyCities,
   setIndex,
@@ -75,6 +76,13 @@ const Home = ({
                     />
                   </CityForecastContainer>
                 )})
+              ) : ( myCities.length ? (
+                <NoCityForecast>
+                  {language === "english"
+                    ? stringEnglish.loading
+                    : stringSpanish.loading}
+                  {"\n"} 🌙 ❄️ ☔️ 🌈 🌤️
+                </NoCityForecast>
               ) : (
                 // if there is no weather data, render a message to the user
                 <NoCityForecast>
@@ -83,7 +91,7 @@ const Home = ({
                     : stringSpanish.NoWeatherToShow}
                   {"\n"} 🌙 ❄️ ☔️ 🌈 🌤️
                 </NoCityForecast>
-              )}
+              ))}
           </ScrollView>
         </SafeAreaView>
       </ImageBackground>
