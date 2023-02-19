@@ -60,12 +60,12 @@ Note: You will need to have an emulator or a device to run the app. You can foll
 
 
 ## Screenshots
-<img src=https://user-images.githubusercontent.com/16329583/218903514-bf1a63d0-7010-47c9-943d-73e0e6accdf1.png alt="Lovely Weather Homepage" style="width: 50%; height: auto;">
-<p style="text-align: center; font-style: italic;">The Lovely Weather - Homepage </p>
+<img src=https://user-images.githubusercontent.com/16329583/219956683-721bc2ca-9201-414f-b271-7d3afd5dab1c.png alt="Lovely Weather Homepage" style="width: 50%; height: auto;">
+<p style="text-align: center; font-style: italic;">Lovely Weather - Homepage </p>
 
 ---
 
-<img src=https://user-images.githubusercontent.com/16329583/218903673-9bb56259-4d70-413f-adf2-29e7599fefb3.png alt="Lovely Weather Detailed Weather page" style="width: 50%; height: auto;">
+<img src=https://user-images.githubusercontent.com/16329583/219956695-0195c5aa-12e3-495a-9747-4a8ae3d30767.png alt="Lovely Weather Detailed Weather page" style="width: 50%; height: auto;">
 <p style="text-align: center; font-style: italic;"> Lovely Weather - Detailed Weather page</p>
 
 
