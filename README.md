@@ -21,7 +21,7 @@ Lovely Weather is a mobile app that makes it easy to check the weather in differ
 
 ## Getting Started
 To install and run the app, first install
-- iOS simulator and 
+- iOS simulator 
 - Android studio
 - Node
 - NPM
@@ -29,7 +29,7 @@ To install and run the app, first install
 
 Then follow these steps:
 
-1- Clone the repository to your local machine.
+1- Unzip the file if you have it or clone the repository if you have access to it
 ```
 git clone https://github.com/nunyvega/weather-app.git
 ```
