@@ -29,11 +29,7 @@ const WeatherDetails = ({
       <ImageBackground
         source={theme === "light" ? lightTheme.bgImage : darkTheme.bgImage}
         style={{ width: "100%", height: "100%" }}
-      >
-        <Text>
-          Loading{"\n"} weather data{"\n"}-----{"\n"}maybe try again
-        </Text>
-      </ImageBackground>
+      />
     );
   }
 

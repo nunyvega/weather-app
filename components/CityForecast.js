@@ -87,7 +87,7 @@ const Description = styled.Text`
 const CloseButton = styled.TouchableOpacity`
   width: 30px;
   height: 30px;
-  background-color: ${({ theme }) => theme.contrastBackground};
+  background-color: ${({ theme }) => theme.background};
   border-radius: 20px;
   align-items: center;
   justify-content: center;
