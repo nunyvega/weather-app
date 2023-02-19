@@ -45,6 +45,11 @@ API_KEY=your-api-key
 ```
 You can then import/export this key.
 
+For testing purposes, you can use my API key:
+```
+API_KEY=319a939ff6c1e4cfcd38154d84e44acf
+```
+
 4- Start the app by running the following command:
 ```
 expo start
